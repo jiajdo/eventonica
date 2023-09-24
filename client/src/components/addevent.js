@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const FormEvent = (props) => {
+const AddEvent = (props) => {
 
     //This is my state with the initial values empty
     const [event, setEvent] = useState({ title: "", location: "", eventtime: "" })
@@ -66,4 +66,4 @@ const FormEvent = (props) => {
 
 }
 
-export default FormEvent;
+export default AddEvent;
