@@ -25,7 +25,7 @@ app.get("/api/events", async (req, res) => {
   //real connection with the DB eventonica
   try {
     const { rows: events } = await db.query("SELECT * FROM events;");
-    console.log({events})
+    console.log({ events });
     res.send(events);
   } catch (error) {
     console.log(error);
@@ -64,6 +64,26 @@ app.post("/api/events", async (req, res) => {
     console.log(response);
     res.json(response);
   } catch (e) {
+    console.log(error);
+    return res.status(400).json({ error });
+  }
+});
+
+app.post("/api/delete", async (req, res) => {
+  try {
+    const deleteEvent = {
+      title: req.body.title,
+      location: req.body.location,
+      eventtime: req.body.eventtime,
+    };
+    const deleteResult = await db.query(
+        "DELETE FROM events WHERE title=$1 AND location=$2 AND eventtime=$3 RETURNING *",
+        [deleteEvent.title, deleteEvent.location, deleteEvent.eventtime]
+      );
+      let response = deleteResult.rows[0];
+      console.log(response);
+      res.json(response);
+  } catch (error) {
     console.log(error);
     return res.status(400).json({ error });
   }

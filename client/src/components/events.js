@@ -38,7 +38,7 @@ function Events() {
 
   const postDeleteRequest = (newEvent) => {
     //console.log("From the parent", newEvent);
-    return fetch("http://localhost:8080/api/events", {
+    return fetch("http://localhost:8080/api/delete", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newEvent),
