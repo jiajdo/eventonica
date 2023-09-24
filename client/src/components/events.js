@@ -34,7 +34,10 @@ function Events() {
         setEvents((events) => [...events, data])
       })
     }
-
+if (events.length === 0){
+  return <div>Loading...</div>
+}
+console.log({events})
   return (
     <div>
     <CardGroup className="Events">
