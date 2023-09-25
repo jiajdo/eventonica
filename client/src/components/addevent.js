@@ -11,14 +11,14 @@ const AddEvent = (props) => {
         e.preventDefault();
         let newTitle = e.target.value;
         setEvent((event) => ({ ...event, title: newTitle }));
-        //console.log(event.title);
+       
 
     }
     const handleLocationChange = (e) => {
         e.preventDefault();
         let newLocation = e.target.value;
         setEvent((event) => ({ ...event, location: newLocation }));
-        //console.log(event.location);
+       
     }
     const handleDateChange = (e) => {
         e.preventDefault();
