@@ -1,3 +1,4 @@
+
 .App {
   display: grid;
   align-items: center;
@@ -6,6 +7,7 @@
 }
 
 .Events {
+  color: #00556e;
   box-shadow: 1px, gray;
 }
 
@@ -14,7 +16,7 @@ h1 {
   margin-bottom: 50px !important;
 }
 
-form{
+form {
   margin-top: 50px;
 }
 
@@ -24,6 +26,10 @@ form{
 }
 
 .addButton {
-  background-color:#00556e;
+  background-color: #00556e;
   color: white;
+}
+
+body {
+  background-color: bisque !important;
 }
