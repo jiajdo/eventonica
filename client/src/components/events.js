@@ -36,6 +36,21 @@ function Events() {
       });
   };
 
+  const filterDeletedEvent = (events, data) => {
+   let filterEvent = events.filter((event) => {
+      // Return true to *keep* the element
+      return !(
+        event.eventtime == data.eventtime &&
+        event.location == data.location &&
+        event.title == data.title
+      )
+    })
+    console.log(filterEvent)
+    console.log(data)
+    return filterEvent
+    
+  }
+
   const postDeleteRequest = (newEvent) => {
     //console.log("From the parent", newEvent);
     return fetch("http://localhost:8080/api/delete", {
@@ -48,7 +63,7 @@ function Events() {
       })
       .then((data) => {
         //console.log("From the front", data);
-        setEvents((events) => [...events, data]);
+        setEvents((events) => filterDeletedEvent(events, data));
       });
   };
 
