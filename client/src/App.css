@@ -21,3 +21,8 @@ form{
 button {
   color: #00556e;
 }
+
+.addButton {
+  background-color:#00556e;
+  color: white;
+}

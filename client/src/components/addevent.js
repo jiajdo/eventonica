@@ -60,7 +60,7 @@ const AddEvent = (props) => {
                 value={event.eventtime} //state
                 onChange={handleDateChange}
             />
-            <button type="submit" >Add Event</button>
+            <button type="submit" className="addButton">Add Event</button>
         </form>
     )
 
