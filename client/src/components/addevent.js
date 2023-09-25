@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const FormEvent = (props) => {
+const AddEvent = (props) => {
 
     //This is my state with the initial values empty
     const [event, setEvent] = useState({ title: "", location: "", eventtime: "" })
@@ -11,20 +11,20 @@ const FormEvent = (props) => {
         e.preventDefault();
         let newTitle = e.target.value;
         setEvent((event) => ({ ...event, title: newTitle }));
-        //console.log(event.title);
+       
 
     }
     const handleLocationChange = (e) => {
         e.preventDefault();
         let newLocation = e.target.value;
         setEvent((event) => ({ ...event, location: newLocation }));
-        //console.log(event.location);
+       
     }
     const handleDateChange = (e) => {
         e.preventDefault();
         let newDate = e.target.value;
         setEvent((event) => ({ ...event, eventtime: newDate }));
-        //console.log(event.eventtime);
+       
     }
 
     const handleSubmit = (e) => {
@@ -41,7 +41,7 @@ const FormEvent = (props) => {
                 id="add-event-title"
                 placeholder="The Title of your Event"
                 required
-                value={event.title} //state
+                value={event.title}
                 onChange={handleTitleChange}
             />
             <label>Place</label>
@@ -50,20 +50,20 @@ const FormEvent = (props) => {
                 id="add-event-location"
                 placeholder="The Location of your Event"
                 required
-                value={event.location} //state
+                value={event.location} 
                 onChange={handleLocationChange}
             />
             <label>Date</label>
             <input
                 type="date"
                 id="add-event-date"
-                value={event.eventtime} //state
+                value={event.eventtime} 
                 onChange={handleDateChange}
             />
-            <button type="submit" >Add Event</button>
+            <button type="submit" className="addButton">Add Event</button>
         </form>
     )
 
 }
 
-export default FormEvent;
+export default AddEvent;
