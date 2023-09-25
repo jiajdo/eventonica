@@ -31,14 +31,13 @@ app.get("/api/events", async (req, res) => {
     console.log(error);
     return res.status(400).json({ error });
   }
-
 });
 
 // Create a route for the POST request
 
 app.post("/api/events", async (req, res) => {
   //TO - DO - At the end => save this event to the db
-  //INSERT INTO events (title, location, eventtime) VALUES ('Women in Tech Techtonica Panel', 'Overland Park Convention Center', '2023-04-21')
+
   try {
     const newEvent = {
       title: req.body.title,
@@ -58,6 +57,7 @@ app.post("/api/events", async (req, res) => {
   }
 });
 
+// db query to delete events from tables
 app.post("/api/delete", async (req, res) => {
   try {
     const deleteEvent = {
@@ -66,12 +66,12 @@ app.post("/api/delete", async (req, res) => {
       eventtime: req.body.eventtime,
     };
     const deleteResult = await db.query(
-        "DELETE FROM events WHERE title=$1 AND location=$2 AND eventtime=$3 RETURNING *",
-        [deleteEvent.title, deleteEvent.location, deleteEvent.eventtime]
-      );
-      let response = deleteResult.rows[0];
-      console.log(response);
-      res.json(response);
+      "DELETE FROM events WHERE title=$1 AND location=$2 AND eventtime=$3 RETURNING *",
+      [deleteEvent.title, deleteEvent.location, deleteEvent.eventtime]
+    );
+    let response = deleteResult.rows[0];
+    console.log(response);
+    res.json(response);
   } catch (error) {
     console.log(error);
     return res.status(400).json({ error });
