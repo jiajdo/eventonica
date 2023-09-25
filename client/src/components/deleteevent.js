@@ -60,7 +60,7 @@ const DeleteEvent = (props) => {
                 value={event.eventtime} //state
                 onChange={handleDateChange}
             />
-            <button type="submit" >Delete Event</button>
+            <button type="submit" className="deleteButton">Delete Event</button>
         </form>
     )
 

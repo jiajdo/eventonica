@@ -18,8 +18,9 @@ form{
   margin-top: 50px;
 }
 
-button {
-  color: #00556e;
+.deleteButton {
+  background-color: red;
+  color: white;
 }
 
 .addButton {
