@@ -1,48 +1,90 @@
 import { useState, useEffect } from "react";
 import EventCard from "./event";
-import CardGroup from 'react-bootstrap/CardGroup';
-import FormEvent from "./formevent";
-
-
+import CardGroup from "react-bootstrap/CardGroup";
+import AddEvent from "./addevent";
+import DeleteEvent from "./deleteevent";
 
 function Events() {
-    const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState([]);
 
-    const getRequest = () => {
-      fetch("http://localhost:8080/api/events")
+  const getRequest = () => {
+    fetch("http://localhost:8080/api/events")
       .then((response) => response.json())
-      .then(events => {
-        setEvents(events); 
-        console.log('Events fetched...', events);
-        });
-    }
+      .then((events) => {
+        setEvents(events);
+        console.log("Events fetched...", events);
+      });
+  };
 
-    useEffect(() => {getRequest()}, []);
+  useEffect(() => {
+    getRequest();
+  }, []);
 
-    const postRequest = (newEvent) =>{
-      //console.log("From the parent", newEvent);
-      return fetch("http://localhost:8080/api/events", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newEvent),
-      })
+  const postAddRequest = (newEvent) => {
+    //console.log("From the parent", newEvent);
+    return fetch("http://localhost:8080/api/events", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newEvent),
+    })
       .then((response) => {
         return response.json();
       })
       .then((data) => {
         //console.log("From the front", data);
-        setEvents((events) => [...events, data])
-      })
-    }
+        setEvents((events) => [...events, data]);
+      });
+  };
 
+  const filterDeletedEvent = (events, data) => {
+   let filterEvent = events.filter((event) => {
+      // Return true to *keep* the element
+      return !(
+        event.eventtime == data.eventtime &&
+        event.location == data.location &&
+        event.title == data.title
+      )
+    })
+    console.log(filterEvent)
+    console.log(data)
+    return filterEvent
+    
+  }
+
+  const postDeleteRequest = (newEvent) => {
+    //console.log("From the parent", newEvent);
+    return fetch("http://localhost:8080/api/delete", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newEvent),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        //console.log("From the front", data);
+        setEvents((events) => filterDeletedEvent(events, data));
+      });
+  };
+
+  if (events.length === 0) {
+    return <div>Loading...</div>;
+  }
+  console.log({ events });
   return (
     <div>
-    <CardGroup className="Events">
-            {events.map(event =>
-            <EventCard key={event.id} title={event.title} location={event.location} time={event.eventtime}/>
-            )}
-    </CardGroup>
-    <FormEvent postRequest={postRequest} />
+      <CardGroup className="Events">
+        {events.map((event) => (
+          <EventCard
+            key={event.id}
+            title={event.title}
+            location={event.location}
+            time={event.eventtime}
+          />
+        ))}
+      </CardGroup>
+      <AddEvent postRequest={postAddRequest} />
+      <DeleteEvent postRequest={postDeleteRequest} />
     </div>
   );
 }

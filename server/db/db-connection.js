@@ -5,5 +5,5 @@ const db = new Pool({
     rejectUnauthorized: false
   }
 });
-
+console.log({db})
 module.exports = db;

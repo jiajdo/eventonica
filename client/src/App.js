@@ -4,7 +4,7 @@ import Events from './components/events';
 function App() {
   return (
     <div className="App">
-      <h1>Techtonica 2023 events</h1>
+      <h1>Jia's Events Itinerary</h1>
     <Events />
     </div>
   );
